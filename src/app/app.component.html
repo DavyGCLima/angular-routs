@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a routerLink="" class="brand-logo">Rotas com Angular</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a></li>
+            <li><a [routerLink]="['/cursos']" routerLinkActive="router-link-active" >Cursos</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
