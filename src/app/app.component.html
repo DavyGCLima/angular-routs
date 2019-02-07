@@ -3,13 +3,19 @@
         <div class="nav-wrapper">
             <a routerLink="" class="brand-logo">Rotas com Angular</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a></li>
-            <li><a [routerLink]="['/cursos']" routerLinkActive="router-link-active" >Cursos</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/login']" 
+                routerLinkActive="router-link-active" >Login</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/cursos']" 
+                routerLinkActive="router-link-active" >Cursos</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['curso', idCurso.value]" 
+                routerLinkActive="router-link-active" >Curso com id</a></li>
             </ul>
         </div>
     </nav>
 </header>
 
 <div class="container">
+    <p>Informe o identificador do curso</p><br>
+    <input #idCurso>
     <router-outlet></router-outlet>
 </div>
