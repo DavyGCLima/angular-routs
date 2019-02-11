@@ -9,7 +9,7 @@ const routes = [
     {
         // ao definir um children, não será necessário dizer o caminho completo
         // como /aluno/:id
-        path: 'alunos', component: AlunosComponent, children: [
+        path: '', component: AlunosComponent, children: [
             { path: 'novo', component: AlunFormComponent },
             { path: ':id', component: AlunoDetalheComponent },
             { path: ':id/editar', component: AlunFormComponent }

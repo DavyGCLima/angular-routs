@@ -1,7 +1,7 @@
 <p>Lista de Cursos</p>
 <div class="collection card-panel">
     <a class="collection-item"
-    [routerLink]="['/curso', curso.id]" routerLinkActive="router-link-active"  
+    [routerLink]="['/cursos', curso.id]" routerLinkActive="router-link-active"  
     *ngFor="let curso of cursos">{{curso.nome}}</a>
 </div>
 <p class="blue-text text-darken-2">Página: {{ pagina }}</p>
