@@ -1,3 +1,4 @@
+import { CursosGuard } from './guards/cursos.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +15,8 @@ const routes: Routes = [
   {
     path: 'cursos',
     loadChildren: './cursos/cursos.module#CursosModule',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    canActivateChild: [CursosGuard]
   },
   {
     path: 'alunos',

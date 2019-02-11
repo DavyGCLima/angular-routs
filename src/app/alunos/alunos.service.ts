@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../login/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,13 @@ export class AlunosService {
       }
     }
     return null;
+  }
+
+  // este método deve estar em outro serviço
+  async verifyUser(data: User): Promise<boolean> {
+    return await new Promise( (resolve, reject) => {
+      return setTimeout( () => false , 1000);
+    } );
   }
 
   constructor() { }
