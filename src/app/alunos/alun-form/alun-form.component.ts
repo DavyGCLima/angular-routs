@@ -3,16 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormCanDeactivateInterface } from 'src/app/guards/form-candeactivate-interface';
 
 @Component({
   selector: 'app-alun-form',
   templateUrl: './alun-form.component.html',
   styleUrls: ['./alun-form.component.css']
 })
-export class AlunFormComponent implements OnInit, OnDestroy {
+export class AlunFormComponent implements OnInit, OnDestroy, FormCanDeactivateInterface {
 
   aluno: any;
-  inscricao: Subscription;
+  private inscricao: Subscription;
+  private formChanged = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +31,23 @@ export class AlunFormComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  onInput() {
+    this.formChanged = true;
+    console.log('mudou');
+  }
+
+  canDeactivate(): boolean {
+    return this.canChangeRoute();
+  }
+
+  canChangeRoute() {
+    if (this.formChanged) {
+      confirm('Deseja sair desta página?');
+      return false;
+    }
+    return true;
   }
 
   ngOnDestroy() {

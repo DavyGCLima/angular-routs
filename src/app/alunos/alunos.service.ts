@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { User } from '../login/user';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class AlunosService {
     { id: 1, nome: 'Aluno 02', email: 'alunos02@someemail.com' },
     { id: 2, nome: 'Aluno 03', email: 'alunos03@someemail.com' }
   ];
+
+  canEditEmmiter: EventEmitter<boolean> = new EventEmitter();
 
   getAlunos() {
     return this.alunos;
@@ -25,12 +27,19 @@ export class AlunosService {
     return null;
   }
 
-  // este método deve estar em outro serviço
-  async verifyUser(data: User): Promise<boolean> {
-    return await new Promise( (resolve, reject) => {
-      return setTimeout( () => false , 1000);
-    } );
+  getEvent(): EventEmitter<boolean> {
+    return this.canEditEmmiter;
   }
 
-  constructor() { }
+  // este método deve estar em outro serviço
+  verifyUser(data: User): boolean {
+    const value = true;
+    this.canEditEmmiter.emit(value);
+    console.log('verifyUser');
+    return value;
+  }
+
+  constructor() {
+    console.log(this.canEditEmmiter);
+  }
 }

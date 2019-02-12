@@ -40,7 +40,7 @@ export class CursosComponent implements OnInit, OnDestroy {
     // this.pagina++;
     this.router.navigate(['/cursos'],
     {
-      queryParams: {'pagina': ++this.pagina}
+      queryParams: {'página': ++this.pagina}
     });
   }
 
