@@ -12,12 +12,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MaterializeModule } from 'angular2-materialize';
+import { PageNotFoundComponent } from './pageNotFound/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

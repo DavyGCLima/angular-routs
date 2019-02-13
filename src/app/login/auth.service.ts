@@ -2,9 +2,7 @@ import { User } from './user';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   private autenticateUser = false;

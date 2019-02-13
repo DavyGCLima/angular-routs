@@ -1,4 +1,6 @@
 import { AlunosService } from './../alunos.service';
+import { Aluno } from './../aluno';
+
 import { ActivatedRoute, Router, CanActivateChild } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
@@ -10,10 +12,10 @@ import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
 })
 export class AlunoDetalheComponent implements OnInit, OnDestroy {
 
-  aluno: any;
+  aluno: Aluno;
   inscricao: Subscription;
+  inscricao2: Subscription;
   showButton = 'waves-effect waves-light btn';
-  private showButtonSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,29 +24,31 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
   ) { }
 
   editar() {
+    try {
     this.router.navigate(['/alunos', this.aluno.id, 'editar']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   ngOnInit() {
-    this.inscricao = this.route.params.subscribe(
-      (params: any) => {
-        const id: number = Number(params.id);
-        this.aluno = this.alunosService.getAluno(id);
+    console.log('init aluno detalhe');
+    this.inscricao = this.route.data.subscribe(
+      ( data: { aluno: Aluno }) => {
+        console.log(data);
+        this.aluno = data.aluno;
       }
     );
-    this.showButtonSub = this.alunosService.canEditEmmiter.subscribe(
-      (params: boolean) => {
-        console.log('onchange');
-        params ? this.showButton = 'waves-effect waves-light btn' :
-        this.showButton = 'btn disabled';
+    this.alunosService.observable.subscribe(
+      (value: boolean) => {
+        console.log('passou');
+        value ? this.showButton = 'waves-effect waves-light btn' :
+            this.showButton = 'btn disabled';
       }
     );
-    console.log('init aluno-detalhe');
   }
 
   ngOnDestroy() {
-    console.log('onDestroy aluno-detalhe');
     this.inscricao.unsubscribe();
-    this.showButtonSub.unsubscribe();
   }
 }

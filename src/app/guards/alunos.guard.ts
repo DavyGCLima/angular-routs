@@ -2,11 +2,8 @@ import { AlunosService } from './../alunos/alunos.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from '../login/user';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AlunosGuard implements CanActivateChild  {
 
   constructor(private service: AlunosService) {}
@@ -15,10 +12,11 @@ export class AlunosGuard implements CanActivateChild  {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
-    console.log('alunos guard');
+
+    console.log('aluno guard');
 
     if (state.url.includes('editar')) {
-      return this.service.verifyUser(new User());
+      // return this.service.verifyUser(new User());
     }
     return true;
   }

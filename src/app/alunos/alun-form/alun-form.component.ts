@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormCanDeactivateInterface } from 'src/app/guards/form-candeactivate-interface';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-alun-form',
@@ -12,7 +13,7 @@ import { FormCanDeactivateInterface } from 'src/app/guards/form-candeactivate-in
 })
 export class AlunFormComponent implements OnInit, OnDestroy, FormCanDeactivateInterface {
 
-  aluno: any;
+  aluno: any = {};
   private inscricao: Subscription;
   private formChanged = false;
 
@@ -26,7 +27,7 @@ export class AlunFormComponent implements OnInit, OnDestroy, FormCanDeactivateIn
       (params: any) => {
         const id: number = Number(params.id);
         this.aluno = this.alunosService.getAluno(id);
-        if (this.aluno.aluno === null) {
+        if (this.aluno === null) {
           this.aluno = {};
         }
       }
@@ -45,7 +46,6 @@ export class AlunFormComponent implements OnInit, OnDestroy, FormCanDeactivateIn
   canChangeRoute() {
     if (this.formChanged) {
       confirm('Deseja sair desta página?');
-      return false;
     }
     return true;
   }
